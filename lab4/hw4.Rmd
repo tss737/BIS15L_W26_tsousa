@@ -74,7 +74,9 @@ ggplot(data=msleep,
   geom_boxplot(mapping=aes(fill=vore))+
   labs(title="Sleep Total by Vore Type")
 ```
+
 Insectivores tend to sleep the most.
+
 **9. Is there a relationship between brain weight and body weight? Build a plot to support your answer.**
 ```{r}
 ggplot(data=msleep,
@@ -87,11 +89,22 @@ ggplot(data=msleep,
        x="Brain Weight (kg)",
        y="Body Weight (kg)")
 ```
-Yes there is a positive corralation between body weight and brain weight.
+
+Yes, there is a positive corralation between body weight and brain weight.
+
 **10. Build one plot of your choice that provides additional insight into the msleep dataset. Be sure to include appropriate labels and a title.**
 ```{r}
-
+ggplot(data=msleep,
+       mapping=aes(x=brainwt, y=sleep_total))+
+  scale_x_log10()+
+  geom_point()+
+  geom_smooth(method=lm)+
+  labs(title="Brain Weight (kg) vs Total Sleep Time (hr)",
+       x="Brain Weight (kg)",
+       y="Total Sleep Time (hr)")
 ```
+
+There is a negative cooralation between brain weight and total sleep time.
 
 ## Knit and Upload
 Please knit your work as an .html file and upload to Canvas. Homework is due before the start of the next lab. No late work is accepted. Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
