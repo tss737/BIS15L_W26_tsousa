@@ -51,26 +51,40 @@ ggplot(data=homerange,
   labs(title="Trophic Guild Counts")
 ```
 
-There are mre carnivores
+There are more carnivores
 
 **5. Which herbivorous mammals have homeranges greater than 1,000,000 m²? Show only the common name, order, mean homerange size, and mean body mass. Arrange the data in descending order by homerange size and show only the top 10 species.**
 ```{r}
 homerange %>% 
-  select(common.name, mean.hra.m2, mean.mass.g)
+  select(common.name, order, mean.hra.m2, mean.mass.g) %>% 
+  filter(mean.hra.m2>1000000) %>% 
+  arrange(desc(mean.hra.m2)) %>% 
+  slice_head(n=10)
 ```
 
 **6. Which two species have the largest and smallest homerange sizes?**
 ```{r}
-
+homerange %>% 
+  select(species, mean.hra.m2) %>% 
+  slice_min(mean.hra.m2)
 ```
+
+Hipoliti have the smallest mean homerange size.
 
 ```{r}
-
+homerange %>% 
+  select(species, mean.hra.m2) %>% 
+  slice_max(mean.hra.m2)
 ```
+
+Tarandus have the largest mean homerange size.
 
 **7. Which carnivorous mammals have the largest homeranges?**
 ```{r}
-
+homerange %>% 
+  select(common.name, taxon, trophic.guild, mean.hra.m2) %>% 
+  filter(taxon=="mammals", trophic.guild=="carnivore") %>% 
+  arrange(desc(mean.hra.m2))
 ```
 
 **8. Is there a relationship between body mass and homerange size? Make a scatterplot to show this relationship. Be sure to include appropriate labels and a title.**
