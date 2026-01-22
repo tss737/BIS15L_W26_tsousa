@@ -115,7 +115,9 @@ homerange %>%
 **10. Do one additional exploratory analysis of your choice. Before writing the code, write the question you are trying to answer. The question should be biologically meaningful and appropriate for the data. It must include at least one `filter()`, `select()`, and `arrange()`.**
 ```{r}
 homerange %>% 
+  select(taxon, mean.hra.m2) %>% 
   filter(taxon=="marine fishes" | taxon=="lake fishes") %>% 
+  arrange(desc(mean.hra.m2)) %>% 
   ggplot(mapping=aes(x=taxon, y=mean.hra.m2))+
   scale_y_log10()+
   geom_boxplot(mapping=aes(fill=taxon))+
@@ -123,6 +125,8 @@ homerange %>%
        x="Taxon",
        y="Mean Homerange (m2)")
 ```
+
+Do lake or marine fishes have a larger mean homerange?
 
 ## Knit and Upload
 Please knit your work as an .html file and upload to Canvas. Homework is due before the start of the next lab. No late work is accepted. Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
