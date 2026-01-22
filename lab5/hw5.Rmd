@@ -89,17 +89,39 @@ homerange %>%
 
 **8. Is there a relationship between body mass and homerange size? Make a scatterplot to show this relationship. Be sure to include appropriate labels and a title.**
 ```{r}
-
+homerange %>% 
+  ggplot(mapping=aes(x=mean.mass.g, y=mean.hra.m2))+
+  scale_x_log10()+
+  scale_y_log10()+
+  geom_point()+
+  geom_smooth(method=lm)+
+  labs(title="Mean Body Mass (g) vs Mean Homerange Size (m2)",
+       x="Mean Body Mass (g)",
+       y="Mean Homerange Size (m2)")
 ```
 
 **9. Use filter to extract the data for only birds and mammals. Then make a plot that compares the homerange sizes of these two groups. Be sure to include appropriate labels and a title.**
 ```{r}
-
+homerange %>% 
+  filter(taxon=="birds" | taxon=="mammals") %>% 
+  ggplot(mapping=aes(x=taxon, y=mean.hra.m2))+
+  scale_y_log10()+
+  geom_boxplot(mapping=aes(fill=taxon))+
+  labs(title="Homerange Size Comparison",
+       x="Taxon",
+       y="Mean Homerange (m2)")
 ```
 
 **10. Do one additional exploratory analysis of your choice. Before writing the code, write the question you are trying to answer. The question should be biologically meaningful and appropriate for the data. It must include at least one `filter()`, `select()`, and `arrange()`.**
 ```{r}
-
+homerange %>% 
+  filter(taxon=="marine fishes" | taxon=="lake fishes") %>% 
+  ggplot(mapping=aes(x=taxon, y=mean.hra.m2))+
+  scale_y_log10()+
+  geom_boxplot(mapping=aes(fill=taxon))+
+  labs(title="Homerange Size Comparison",
+       x="Taxon",
+       y="Mean Homerange (m2)")
 ```
 
 ## Knit and Upload
