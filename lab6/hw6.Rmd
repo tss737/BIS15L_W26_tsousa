@@ -23,40 +23,55 @@ Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate 
 
 **1. Load `IvindoData_DryadVersion.csv` and store it as a new object called `gabon`.**
 ```{r}
-
+gabon <- read_csv("data/IvindoData_DryadVersion.csv")
 ```
 
 **2. Use one or more of the summary functions you have learned to get an idea of the structure of the data.**  
 ```{r}
-
+glimpse(gabon)
+summary(gabon)
 ```
 
 **3. Clean the data as necessary following the conventions from lab 6.**
 ```{r}
-
+gabon <- gabon %>% 
+  clean_names()
 ```
 
 ```{r}
-
+glimpse(gabon)
 ```
 
 **4. Use `mutate()` Change the variables `HuntCat`, `LandUse`, and `TransectID` to factors. Be sure to store the output as a new dataframe and use it for the remaining questions.**
 ```{r}
-
+gabon <- gabon %>% 
+  mutate(across(c(hunt_cat, land_use, transect_id), as.factor))
 ```
 
 **5. Make a plot that shows the number of transects for each land use type.**
 ```{r}
-
+glimpse(gabon)
 ```
 
 ```{r}
-
+gabon %>% 
+  select(land_use) %>% 
+  ggplot(mapping=aes(x=land_use))+
+  geom_bar(mapping=aes(fill=land_use))+
+  labs(title="Number of Transects Per Land Use Type",
+       x="Land Use",
+       y="Number of Transects")
 ```
 
 **6. How does vegetation richness compare among land use types?**
 ```{r}
-
+gabon %>% 
+  select(veg_rich, land_use) %>% 
+  ggplot(mapping=aes(x=land_use, y=veg_rich))+
+  geom_boxplot(mapping=aes(fill=land_use))+
+  labs(title="Vegetation Richness of Land Use Types",
+       x="Land Use Type",
+       y="Vegetation Richness")
 ```
 
 **7. For which land use type (national parks, logging, or neither) is average all species diversity the greatest?**
