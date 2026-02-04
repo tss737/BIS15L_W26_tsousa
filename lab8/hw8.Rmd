@@ -83,7 +83,7 @@ fisheries_clean %>%
   head(n=10)
 ```
 
-NEI stands for not elsewhere indicated/included. This means there are many species grouped together, not seperated by species. This can be concerning because we don't know what fish are being caught.
+NEI stands for not elsewhere indicated/included. This means there are many species grouped together, not separated by species. This can be concerning because we don't know what fish are being caught.
 
 8. For the species that was caught the most above (not NEI), which country had the highest catch in 2023?
 ```{r}
@@ -98,13 +98,31 @@ The Russian Federation had the highest catch of Alaska pollock(=Walleye poll.) i
 
 9. How has fishing of this species changed over the last decade (2013-2023)? Create a  plot showing total catch by year for this species.
 ```{r}
-
+fisheries_clean %>% 
+  filter(period %in% c("2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"), common_name=="Alaska pollock(=Walleye poll.)") %>% 
+  ggplot(aes(x=period, y=catch))+
+  geom_col()+
+  labs(title="Alaska Pollock Global Catch Per Year (2013-2023)",
+       x="Period",
+       y="Number Caught")
 ```
+
+Fishing for this species has stayed relatively the same, maybe slightly trending up, over the last decade.
 
 10. Perform one exploratory analysis of your choice. Make sure to clearly state the question you are asking before writing any code.
-```{r}
 
+I want to explore what the most fished for fish (based on common name, not including NEI) is for each of the geographical regions in the data.
+
+```{r}
+fisheries_clean %>% 
+  filter(!grepl("NEI", common_name)) %>% 
+  group_by(geo_region, common_name) %>% 
+  summarize(n_caught=sum(catch), .groups='drop') %>% 
+  group_by(geo_region) %>% 
+  slice_max(n_caught, n=1)
 ```
+
+Here we see the common name of the most fished for fish in each of the geographical regions and the number caught. 
 
 ## Knit and Upload
 Please knit your work as an .html file and upload to Canvas. Homework is due before the start of the next lab. No late work is accepted. Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
