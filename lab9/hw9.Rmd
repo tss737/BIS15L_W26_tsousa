@@ -66,26 +66,42 @@ sydneybeaches_long %>%
 
 7. What is the average `enterococci_cfu_100ml` by year for each beach. Think about which data you will use- long or wide.
 ```{r}
-
+sydneybeaches_long %>% 
+  separate(Date, into=c("day", "month", "year"), sep="/") %>% 
+  group_by(Site, year) %>% 
+  summarize(entero_year_avg = mean(`Enterococci (cfu/100ml)`, na.rm=T))
 ```
 
 8. Make the output from question 7 easier to read by pivoting it to wide format.
 ```{r}
-
+sydneybeaches_long %>% 
+  separate(Date, into=c("day", "month", "year"), sep="/") %>% 
+  group_by(Site, year) %>% 
+  summarize(entero_year_avg = mean(`Enterococci (cfu/100ml)`, na.rm=T)) %>% 
+  pivot_wider(names_from = "Site",
+              values_from = "entero_year_avg")
 ```
 
 9. What was the most polluted beach in 2013?
 ```{r}
-
+sydneybeaches_long %>% 
+  separate(Date, into=c("day", "month", "year"), sep="/") %>% 
+  filter(year =="2013") %>% 
+  group_by(Site) %>% 
+  summarize(entero_2013_avg = sum(`Enterococci (cfu/100ml)`, na.rm=T)) %>% 
+  arrange(desc(entero_2013_avg))
 ```
 
-```{r}
-
-```
+The most polluted beach in 2013 was Little Bay Beach.
 
 10. Explore the data! Do one analysis of your choice that includes a minimum of three lines of code.  
 ```{r}
-
+sydneybeaches %>% 
+  separate(Date, into=c("day", "month", "year"), sep="/") %>% 
+  group_by(Council, year) %>% 
+  summarize(entero_year_avg = mean(`Enterococci (cfu/100ml)`, na.rm=T)) %>% 
+  pivot_wider(names_from = "Council",
+              values_from = "entero_year_avg")
 ```
 
 ## Knit and Upload
