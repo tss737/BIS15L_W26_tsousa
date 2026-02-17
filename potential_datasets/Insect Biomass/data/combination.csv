@@ -1,0 +1,13 @@
+Habitat-Landscape;mas;bin;rl;sig;
+Forest - Semi-natural;0;0;0;,,a;a-a
+Forest - Agricultural;19.762;-3.869;-10.301;a,,;b-a
+Forest - Urban;-4.305;-0.77;-11.323;,a,;c-a
+Meadow - Semi-natural;2.598;-17.467;-27.054;,,b;a-b
+Meadow - Agricultural;10.573;-18.533;-31.545;,,;b-b
+Meadow - Urban;-16.492;-25.793;-27.116;,,;c-b
+Arable Field - Semi-natural;-4.363;-27.409;-45.088;,,;a-c
+Arable Field - Agricultural;-0.547;-29.005;-55.804;b,,c;b-c
+Arable Field - Urban;-12.266;-28.1;-46.743;,,;c-c
+Settlement - Semi-natural;-16.559;-1.096;-11.588;,,;a-d
+Settlement - Agricultural;-18.472;-13.96;-33.398;,,;b-d
+Settlement - Urban;-22.617;-17.235;-24.621;c,b,;c-d
